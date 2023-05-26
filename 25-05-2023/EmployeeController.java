@@ -6,13 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.dal.model.Employee;
 
-public class EmployeeController implements EmployeeInterface {
+public class EmployeeController implements EmployeeInterface,Serializable {
 	
 	Scanner sc = new Scanner(System.in);
 	List<Employee> emplist = new ArrayList(); 
@@ -39,13 +40,13 @@ public class EmployeeController implements EmployeeInterface {
 		System.out.println(emplist);
 		
 	}
-	public void serializee() throws IOException
+	public void serializee(List<Employee> emp) throws IOException
 	{
 		try{
 		
 		FileOutputStream fos = new FileOutputStream("dedalus.txt");
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		Employee emp = emplist.get(0); 
+//		Employee emp = emplist.get(0); 
 		oos.writeObject(emp);
 		System.out.println("Serilized to file dedalus.txt");
 		oos.close();
@@ -65,10 +66,11 @@ public class EmployeeController implements EmployeeInterface {
 		FileInputStream fis = new FileInputStream(filename);
 		ObjectInputStream ois = new ObjectInputStream(fis);
 		
-		Employee emp = (Employee)ois.readObject();
+		List<Employee> emp = (List<Employee>)ois.readObject();
 		System.out.println("DeSerilized from file "+filename);
-		System.out.println(emp.getEmpno());
-		System.out.println(emp.getEname());
+		System.out.println(emp);
+//		System.out.println(emp.getEmpno());
+//		System.out.println(emp.getEname());
 		ois.close();
 		fis.close();
 		}

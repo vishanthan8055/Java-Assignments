@@ -51,7 +51,7 @@ public class MainClass {
 						break;
 					}
 					case 3: {
-						ec.serializee();
+						ec.serializee(ec.getEmplist());
 						break;
 					}
 					case 4: {
